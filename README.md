@@ -12,8 +12,7 @@
         data = base64.urlsafe_b64decode(b64)
         decompressed = gzip.decompress(data)
         result = decompressed.decode(errors="replace")
-        with open("index.html", "w") as f:
-            f.write(f"<html><body>{result}</body></html>")
         </script>
+        <h1>{result}</h1>
 </body>
 </html>
