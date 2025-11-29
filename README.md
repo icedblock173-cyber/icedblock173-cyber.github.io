@@ -13,5 +13,38 @@
         decompressed = gzip.decompress(data)
         print(decompressed.decode(errors="replace"))
         </script>
+        <script>
+            // Store the original console.log function to still log to the developer console
+            const originalConsoleLog = console.log;
+
+            // Get the HTML element where output will be displayed
+            const outputArea = document.getElementById('output-area');
+
+            // Override console.log
+            console.log = function(...args) {
+                // Call the original console.log to maintain developer console output
+                originalConsoleLog.apply(console, args);
+
+                // Convert arguments to a string for display in HTML
+                const message = args.map(arg => {
+                    if (typeof arg === 'object' && arg !== null) {
+                        try {
+                            return JSON.stringify(arg, null, 2); // Prettify objects
+                        } catch (e) {
+                            return String(arg); // Fallback for circular references or complex objects
+                        }
+                    }
+                    return String(arg);
+                }).join(' ');
+
+                // Create a new paragraph or list item for each message
+                const messageElement = document.createElement('p');
+                messageElement.textContent = message;
+                outputArea.appendChild(messageElement);
+
+                // Optional: Scroll to the bottom to show latest messages
+                outputArea.scrollTop = outputArea.scrollHeight;
+            };
+        </script>
 </body>
 </html>
