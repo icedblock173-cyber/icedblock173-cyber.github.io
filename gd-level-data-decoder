@@ -1,0 +1,57 @@
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.2/core.css" />
+        <script type="module" src="https://pyscript.net/releases/2025.11.2/core.js"></script>
+        <style>
+            body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; margin: 1.6rem; background: #f7fafc; }
+            textarea { width: 100%; height: 200px; font-family: monospace; padding: 8px; box-sizing: border-box; }
+            .row { display:flex; gap: .5rem; margin-top:.5rem; }
+            button { padding: .5rem 1rem; cursor: pointer; }
+            pre { background: #fff; padding: 1rem; border-radius: 8px; white-space: pre-wrap; word-break: break-word; }
+            .debug { font-size: .9rem; color: #444; margin-top:.5rem; }
+            label { display:inline-flex; align-items:center; gap:.5rem; }
+            #dropzone { border: 2px dashed #cbd5e1; padding: 1rem; border-radius: 8px; text-align: center; color:#64748b; margin-top:.5rem; }
+        </style>
+    </head>
+    <body>
+        <h1>GD Level String Decryptor</h1>
+
+        <label for="input">Paste Base64/GZIP/plain text here:</label>
+        <textarea id="gms" placeholder="Paste base64 (maybe gzip) or plain text"></textarea>
+
+        <div class="row">
+          <button py-click="decode">Decode</button>
+          <button id="downloadBtn" disabled>Download decoded</button>
+          <label><input type="checkbox" id="forceBase64"> Force treat input as Base64</label>
+          <label><input type="checkbox" id="forceGzip"> Force treat result as GZIP</label>
+        </div>
+
+        <div id="dropzone">Or drop a file here (.gz, .b64, .txt). Click to choose file.
+        <input type="file" id="fileInput" style="display:none"></div>
+
+        <h2>Decoded Output</h2>
+        <pre id="output">(decoded output will appear here)</pre>
+
+        <script type="py">
+            from js import document
+            from pyodide.ffi import create_proxy
+            import base64, gzip
+            def decode(evt):
+                # Get a reference to the HTML input element by its ID
+                gmd = document.getElementById("gms")
+                
+                # Access the 'value' property of the underlying DOM element
+                user_text = gmd.value
+
+                try:
+                    data = base64.urlsafe_b64decode(user_text)
+                    decompressed = gzip.decompress(data).decode(errors="replace")
+                    document.getElementById("output").innerHTML = decompressed
+                except Exception as e:
+                    document.getElementById("output").textContent = f"Error: {e}"
+
+
+                document.getElementById("btn").onclick = create_proxy(decode)
+                </script>
+    </body>
