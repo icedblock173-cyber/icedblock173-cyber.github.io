@@ -1,0 +1,14 @@
+<script>
+const json = '{"result":true, "count":42}';
+const obj = JSON.parse(json);
+
+let name = document.getElementById("id");
+// Expected output: 42
+
+name.innerHTML = "obj.count";
+
+console.log(obj.result);
+// Expected output: true
+</script>
+
+<h1 id=id>sd</h1>
