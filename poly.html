@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Upgrading - Polytoria</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				font-family: 'Poppins', sans-serif;
+				background: #181818;
+				color: #ffffff;
+			}
+			.container {
+				width: 100%;
+				height: 100vh;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.container .content {
+				width: 100%;
+				max-width: 600px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<h1>Don't go anywhere!</h1>
+				<p>We are quickly restarting our systems to make Polytoria bigger and better. Please check back in a few seconds!</p>
+				<p>You will be returned to Polytoria once our upgrade is complete.</p>
+			</div>
+		</div>
+		<script>
+			setInterval(function() {
+				window.location.reload();
+			}, 10000);
+		</script>
+	</body>
+</html>
