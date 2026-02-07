@@ -2,10 +2,8 @@
 const json = '{"result":true, "count":42}';
 const obj = JSON.parse(json);
 
-let name = document.getElementById("id");
+document.getElementById("id").innerHTML = "obj.count";
 // Expected output: 42
-
-name.innerHTML = "obj.count";
 
 console.log(obj.result);
 // Expected output: true
