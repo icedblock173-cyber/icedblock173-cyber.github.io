@@ -1,1 +1,8 @@
-<a href="#utf8help" onclick="utf8help=window.open('https://icedblock173-cyber.github.io','utf8help','toolbar=no,location=yes,directories=yes,status=no,menubar=yes,scrollbars=yes,resizable=yes,width=800,height=500'); return false;">Please click here for help on using Unicode fonts.</a>
+<style>
+  .inner {
+    text-align: center
+    display: inline-block;
+    margin: 25px;
+}
+</style>
+<div class=inner>ioioi</div>
