@@ -1,7 +1,10 @@
 <style>
   .inner {
-    text-align: center
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid green; 
     margin: 25px;
 }
 </style>
