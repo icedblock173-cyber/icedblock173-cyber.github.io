@@ -13,4 +13,4 @@
     margin: 25px;
 }
 </style>
-<div class=inner>ioioi</div>
+<marquee><div class=inner>ioioi</div></marquee>
