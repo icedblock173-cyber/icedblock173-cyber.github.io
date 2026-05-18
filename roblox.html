@@ -1,5 +1,23 @@
-<script>
-setInterval(function(){fetch("https://jsmith908.blogspot.com/",{ referrerPolicy:"no-referrer",mode:"no-cors" });},0);
-</script>
+<head>
+<meta content="strict-origin-when-cross-origin" />
+</head>
+<body>
+<textarea id="input" placeholder="User id"></textarea>
+<pre id="output">(decoded output will appear here)</pre>
+<button type="button" onclick="parsedObject()">Click me to display Date and Time.</button>
 
-<h1 id=id>sd</h1>
+<script>
+function parsedObject() {
+// Source - https://stackoverflow.com/a/28950614
+// Posted by Moshe Shaham
+// Retrieved 2026-01-31, License - CC BY-SA 3.0
+myTitle = document.getElementById("input").value;
+
+var parsedObject = fetch('https://users.roblox.com/v1/users/' + myTitle)
+  .then(response => response.text())
+  .then(text => {
+    document.getElementById("output").innerHTML = JSON.parse(text).id;
+  });
+}
+</script>
+</body>
