@@ -13,7 +13,7 @@ function parsedObject() {
 // Retrieved 2026-01-31, License - CC BY-SA 3.0
 myTitle = document.getElementById("input").value;
 
-var parsedObject = fetch('https://users.roblox.com/v1/users/' + myTitle)
+var parsedObject = fetch('https://users.roproxy.com/v1/users/' + myTitle)
   .then(response => response.text())
   .then(text => {
     document.getElementById("output").innerHTML = JSON.parse(text).id;
