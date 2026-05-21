@@ -1,23 +1,131 @@
+<html>
 <head>
-<meta content="strict-origin-when-cross-origin" />
-</head>
-<body>
-<textarea id="input" placeholder="User id"></textarea>
-<pre id="output">(decoded output will appear here)</pre>
-<button type="button" onclick="parsedObject()">Click me to display Date and Time.</button>
+<style>
+  body {
+    font: normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+    background: url("https://icedblock173-cyber.github.io/bkg.jpg") repeat scroll top left;
+    padding: 0 40px 40px 40px;
+    color: white;
+  }
+  .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid green; 
+    margin: 25px;
+}
+.navbar, #Body {
+  text-align: center;
+}
 
+.navbar, span {
+  font-weight: bold;
+}
+
+.navbar {
+ width: 900px;
+ height: 30px;
+ background-image: linear-gradient(to bottom, #0D85FD, #095FB5);
+ border-top: solid 1px #075FB6;
+ border-bottom: solid 1px #03203E;
+ font-family: arial;
+ padding: 5px;
+ margin: auto;       
+}
+#Body {
+    margin: 0;
+    padding: 5px;
+    width: 900px;
+    background: url(containerBkg_01.png);
+    _overflow: hidden;
+    color: black;
+    margin: auto;
+}
+
+.DarkGradientBox .DGB_Button {
+    cursor: pointer;
+    background-color: #435D77;
+    color: White;
+    text-decoration: none;
+    border: solid 1px #777;
+    padding: 6px 10px 6px 10px;
+    font-family: Verdana,Sans-Serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.DGB_Label, .DGB_Header {
+    color: black;
+    font-family: Verdana;
+}
+
+.DGB_Label {
+    font-size: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.ShadowedStandardBox .Content {
+    padding: 5px;
+    margin-bottom: 8px;
+    background: url(ji) top repeat-x #fff;
+    border: 1px solid #aaa;
+}
+
+.DGB_Header {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: none;
+}
+</style>
 <script>
 function parsedObject() {
 // Source - https://stackoverflow.com/a/28950614
 // Posted by Moshe Shaham
 // Retrieved 2026-01-31, License - CC BY-SA 3.0
-myTitle = document.getElementById("input").value;
+myTitle = document.getElementById("txtUsername").value;
 
 var parsedObject = fetch('https://users.roproxy.com/v1/users/' + myTitle)
   .then(response => response.text())
   .then(text => {
-    document.getElementById("output").innerHTML = JSON.parse(text).id;
+    document.getElementById("output").innerHTML = JSON.parse(text).name;
+    joindate = JSON.parse(text).created;
+    document.getElementById("date").innerHTML = new Date(joindate).toLocaleDateString('en-us'); 
   });
 }
 </script>
+</head>
+<body>
+<h1 class="navbar">Roblox Banned Account Finder</h1>
+<div id="body"><div>
+<div class="DarkGradientBox" style="height: 246px; text-align: center;">
+                <div class="DGB_Header">
+                    Member Login
+                </div>
+                <div class="DGB_Content">
+                    <!-- Enter key submission hack - IE -->
+                    <div style="padding-top: 4px; padding-bottom: 4px;">
+                        <div style="margin-bottom: 7px;">
+                        </div>
+                        <label for="txtUsername" class="DGB_Label">
+                            User ID:</label>
+                            <input type="text" style="width: 120px;" class="DGB_TextBox" id="txtUsername" tabindex="1">
+                    </div>
+                    <div style="margin-top: 9px; text-align: center;">
+                        <a class="DGB_Button" style="padding: 6px 0px 6px 0px; display: block; width: 110px; margin: 0 auto;" onclick="parsedObject()" href="#" tabindex="3">Find</a>
+                    </div>
+                </div>
+            </div>
+<div>
+    <h1>User info</h1>
+    <h3>Username: <b id=output></b></h3>
+    <h3>Join Date: <b id=date></b></h3>
+</div>
 </body>
+</html>
