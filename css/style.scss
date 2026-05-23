@@ -13,7 +13,7 @@ $fonts: Arial, Tahoma, Helvetica, FreeSans, sans-serif;
   body {
     font: normal normal 12px $fonts;
     background: url(bkg.jpg) repeat scroll top left;
-    padding: 0 str-repeat("40px", 3);
+    padding: 0 str-repeat( 40px, 3);
     color: white;
   }
   .inner {
