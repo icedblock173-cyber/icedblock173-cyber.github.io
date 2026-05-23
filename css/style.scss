@@ -17,7 +17,7 @@ $fonts: Arial, Tahoma, Helvetica, FreeSans, sans-serif;
     padding: 0 str-repeat(40px, 3);
     color: white;
   }
-  @debug string.unquote("40px40px40px")
+  .unquote("40px40px40px")
   .inner {
     display: flex;
     justify-content: center;
