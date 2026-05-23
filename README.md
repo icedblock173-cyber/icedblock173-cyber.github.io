@@ -5,7 +5,6 @@
     padding: 0 40px 40px 40px;
     color: white;
   }
-  
   .inner {
     display: flex;
     justify-content: center;
