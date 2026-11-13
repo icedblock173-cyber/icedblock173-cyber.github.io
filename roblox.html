@@ -3,18 +3,14 @@
 <link rel="stylesheet" href="main.css">
 <script>
 function parsedObject() {
-    myTitle = document.getElementById("txtUsername").value;
-    fetch('https://users.roproxy.com/v1/users/' + myTitle)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("output").innerHTML = data.name;
-            joindate = data.created;
-            document.getElementById("date").innerHTML =
-                new Date(joindate).toLocaleDateString('en-us');
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+myTitle = document.getElementById("txtUsername").value;
+var parsedObject = fetch('https://users.roproxy.com/v1/users/' + myTitle)
+  .then(response => response.text())
+  .then(text => {
+    document.getElementById("output").innerHTML = JSON.parse(text).name;
+    joindate = JSON.parse(text).created;
+    document.getElementById("date").innerHTML = new Date(joindate).toLocaleDateString('en-us'); 
+  });
 }
 </script>
 </head>
