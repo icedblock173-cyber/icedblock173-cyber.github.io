@@ -1,0 +1,184 @@
+<html>
+<head>
+<title>Petit tube</title>
+<meta name="description" content="some videos" />
+<meta name="keywords" content="petit, tube, youtube, insightful keyword, INTERNET" />
+<meta name="author" content="Morusque" />
+<meta http-equiv="content-type" content="text/html;charset=iso-8859-1" />
+<meta property="og:title" content="petittube" />
+<meta property="og:description" content="some videos" />
+<meta property="og:image" content="https://petittube.com/titleBigger.jpg" />
+<meta property="og:url" content="https://petittube.com" />
+<meta property="og:type" content="website" />
+<meta charset="UTF-8" />
+<meta http-equiv="content-type" content="content=text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style type="text/css">
+  html, body { margin: 0; padding: 0; height: 100%; background: #000; }
+  body {
+    height: 100dvh;
+    box-sizing: border-box;
+    padding: 1vh 1vw 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+  }
+  .header-row { flex: 0 0 auto; max-width: 100%; display: flex; align-items: center; gap: 10px; }
+  .title-link { flex: 0 1 auto; min-width: 0; line-height: 0; }
+  .title-link img { display: block; max-width: 100%; height: auto; max-height: 12vh; }
+  .video-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-wrap iframe {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    border: 0;
+  }
+  .autoreload {
+    flex: 0 0 auto;
+    font: 10px sans-serif;
+    color: #666;
+    opacity: 0.5;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .autoreload:hover { opacity: 1; }
+  .autoreload input {
+    width: 10px;
+    height: 10px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #666;
+  }
+</style>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-29883635-1']);
+  _gaq.push(['_setDomainName', 'petittube.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script defer src='https://cloud.umami.is/script.js' data-website-id='510570ca-2454-4c78-837a-0caaffb9a4b6'></script></head>
+
+<script type="text/javascript">
+
+if (location.protocol !== 'https:') {
+    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+}
+
+</script>
+
+<body><div class="header-row"><a class="title-link" href="https://petittube.com"><img src="title.png" alt="Petit tube"/></a><label class="autoreload" title="auto-reload"><input type="checkbox" id="autoreloadToggle" />&#8635;</label></div><div class="video-wrap"><iframe id="player" src="https://www.youtube.com/embed/2mLktakdmJ4?version=3&f=videos&app=youtube_gdata&enablejsapi=1" allow="autoplay" allowfullscreen></iframe></div><script type="text/javascript">
+
+  var autoreloadToggle = document.getElementById('autoreloadToggle');
+  try {
+    autoreloadToggle.checked = localStorage.getItem('petittube_autoreload') === '1';
+  } catch (e) {}
+  autoreloadToggle.addEventListener('change', function() {
+    try {
+      localStorage.setItem('petittube_autoreload', autoreloadToggle.checked ? '1' : '0');
+    } catch (e) {}
+    // checking the box counts as a user gesture, so playback can start right away
+    if (autoreloadToggle.checked && player) tryAutoplay();
+  });
+
+  // the page is served with no-cache headers, so a plain navigation
+  // always reaches the server and gets a new random video
+  function loadNewVideo() {
+    location.replace(location.pathname);
+  }
+
+  // start playback; if the browser blocks autoplay with sound,
+  // fall back to muted playback so the flow never stops
+  function tryAutoplay() {
+    player.playVideo();
+    setTimeout(function() {
+      var s = player.getPlayerState ? player.getPlayerState() : -1;
+      if (s !== YT.PlayerState.PLAYING && s !== YT.PlayerState.BUFFERING && s !== YT.PlayerState.ENDED) {
+        forcedMute = true;
+        player.mute();
+        player.playVideo();
+        // once playing, try to give the sound back if the viewer wanted it;
+        // if the browser refuses, the video simply stays muted
+        setTimeout(function() {
+          if (forcedMute && localStorage.getItem('petittube_muted') !== '1'
+              && player.getPlayerState() === YT.PlayerState.PLAYING) {
+            player.unMute();
+          }
+        }, 1500);
+      }
+    }, 2000);
+  }
+
+  // keep volume and mute state from one video to the next ;
+  // a mute forced by the autoplay fallback is not saved as a preference
+  var forcedMute = false;
+  function saveVolume() {
+    try {
+      var muted = player.isMuted();
+      if (!muted) forcedMute = false;
+      if (!forcedMute) localStorage.setItem('petittube_muted', muted ? '1' : '0');
+      localStorage.setItem('petittube_volume', player.getVolume());
+    } catch (e) {}
+  }
+
+  function restoreVolume() {
+    try {
+      var vol = localStorage.getItem('petittube_volume');
+      if (vol !== null) player.setVolume(parseInt(vol, 10));
+      if (localStorage.getItem('petittube_muted') === '1') player.mute();
+    } catch (e) {}
+  }
+
+  var player = null;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      events: {
+        'onReady': function(event) {
+          restoreVolume();
+          setInterval(saveVolume, 1000);
+          if (autoreloadToggle.checked) tryAutoplay();
+        },
+        'onStateChange': function(event) {
+          if (event.data === YT.PlayerState.ENDED && autoreloadToggle.checked) {
+            loadNewVideo();
+          }
+        },
+        'onError': function(event) {
+          if (autoreloadToggle.checked) {
+            setTimeout(loadNewVideo, 800);
+          }
+        }
+      }
+    });
+  }
+
+  var ytApi = document.createElement('script');
+  ytApi.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(ytApi);
+
+</script>
+</body>
+
+</html>
